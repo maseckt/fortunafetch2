@@ -1,6 +1,6 @@
 
 # Maintainer: Your Name <you@example.com>
-pkgname=fortunafetch
+pkgname=fortunafetch2
 pkgver=2.1
 pkgrel=3
 pkgdesc="THE BEST FETCH IN THE WORLD OF ALL EXISTING. 100% FASTER THAN FASTFETCH AND NEOFETCH. PROVEN BY SCIENTISTS.( The following project is a meme and was made for fun dont take it seriously )"
