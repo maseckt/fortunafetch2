@@ -6,34 +6,49 @@ BLUE='\033[0;34m'     # синий
 GREEN='\033[0;32m'    # зеленый
 NC='\033[0m'          # сброс цвета
 
-# --- Логотип ---
-echo -e "${ORANGE}"
-cat << "EOF"
-        ░ ░░░░                            ░░░░░░
-        ░░░░░░                            ░░░░░░
-        ░░░▓▓░░░░   ░░░░░░░░░░░░░░░░░  ░░░░▒▒░░
-         ░░▓▓▓▓▓▓░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░▒▒▒▒▒▒░░
-           ░▓▓▓▓▓▓▓▓▓░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒▒░
-           ░░▓▓▓▓▓▓▓▓▓▓▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒░░
-        ░░░▒▓▓░░░░░░░░░▓▓░░▒▒░░▒▒░░░░░░░░░▒▒░░░░
-        ░░▓▓▓░   ░██░░░░▓▓░░░▒▒▒░░▒░██░░░░░▒▒▒░░
-        ░░▓▓░░ ░░██░░░█░░▓▓░░▒▒░░▒░░░██░  ░░▒▒░
-        ░░▓▓░  ░░███▓█▓░░▓▓░░▒▒░░██▓███░░ ░░▒▒░░
-        ░░▓▓░░   ░░█▓░░░░▓▓░░▒▒░░░░▓█░░   ░░▒▒░░
-         ░░▓▓░░░░  ░░░░▒▓▓░░░░▒▒░░░░░░  ░░░░▒▒░░░
-        ░░░░▓▓▓▓░░░░░▓▓▓▒░░▒▒░░▒▒▒▒░░░░░▒▒▒▒░░░░
-           ░░░░▓▓▓▓▓▓▒░░░░░▒▒░░░░░▒▒▒▒▒▒▒░░░░
-           ░░░▒▒░░░░░▒▒▒▒▒░░░░▒▒▒▒▒░░░░░▒▒░░░
-           ░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░
-              ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
-                 ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░
-                 ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
-                   ░░░░▒▒▒▒▒▒▒▒▒▒░░░░
-                      ░░░▒▒▒▒▒▒░░░
-                      ░░░░░▒▒░░░░░
-                         ░░░░░░
+# --- Логотип в массив ---
+read -r -d '' LOGO <<'EOF'
+    ░ ░░░                            ░░░░░░
+    ░░░░░░                            ░░░░░░
+    ░░░▓▓░░░░   ░░░░░░░░░░░░░░░░░  ░░░░▒▒░░
+     ░░▓▓▓▓▓▓░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░▒▒▒▒▒▒░░
+       ░▓▓▓▓▓▓▓▓▓░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒▒░
+       ░░▓▓▓▓▓▓▓▓▓▓▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒░░
+    ░░░▒▓▓░░░░░░░░░▓▓░░▒▒░░▒▒░░░░░░░░░▒▒░░░░
+    ░░▓▓▓░   ░██░░░░▓▓░░░▒▒▒░░▒░██░░░░░▒▒▒░░
+    ░░▓▓░░ ░░██░░░█░░▓▓░░▒▒░░▒░░░██░  ░░▒▒░░
+    ░░▓▓░  ░░███▓█▓░░▓▓░░▒▒░░██▓███░░ ░░▒▒░░
+    ░░▓▓░░   ░░█▓░░░░▓▓░░▒▒░░░░▓█░░   ░░▒▒░░
+    ░░░▓▓░░░░  ░░░░▒▓▓░░░░▒▒░░░░░░  ░░░░▒▒░░
+    ░░░░▓▓▓▓░░░░░▓▓▓▒░░▒▒░░▒▒▒▒░░░░░▒▒▒▒░░░░
+       ░░░░▓▓▓▓▓▓▒░░░░░▒▒░░░░░▒▒▒▒▒▒▒░░░░
+       ░░░▒▒░░░░░▒▒▒▒▒░░░░▒▒▒▒▒░░░░░▒▒░░░
+       ░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░
+          ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
+             ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
+             ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
+               ░░░░▒▒▒▒▒▒▒▒▒▒░░░░
+                  ░░░▒▒▒▒▒▒░░░
+                  ░░░░░▒▒░░░░░
+                     ░░░░░░
 EOF
-echo -e "${NC}"
+IFS=$'\n' read -rd '' -a LOGO_LINES <<< "$LOGO"
+
+# --- Исправить первую строку лого ---
+# Найти минимальное количество ведущих пробелов среди всех строк (кроме первой)
+min_pad=1000
+for ((i=1; i<${#LOGO_LINES[@]}; i++)); do
+  line="${LOGO_LINES[i]}"
+  pad=$(echo "$line" | grep -o '^ *' | wc -c)
+  [ $pad -lt $min_pad ] && min_pad=$pad
+  # если строка пустая, пропустить
+  [ -z "$line" ] && continue
+  # если строка без пробелов, min_pad=0
+  [ $pad -eq 0 ] && min_pad=0
+
+done
+# Добавить min_pad пробелов к первой строке
+LOGO_LINES[0]="$(printf '%*s' $min_pad)${LOGO_LINES[0]}"
 
 # --- Информация ---
 
@@ -104,8 +119,10 @@ else
 fi
 
 # Диски (только / и /mnt/*, каждый на отдельной строке)
-DISKS=$(df -h --output=target,used,size -x tmpfs -x devtmpfs | awk 'NR>1 && ($1=="/" || $1 ~ /^\/mnt\//){print $1 ": " $2 " / " $3}' )
-DISKS=${DISKS:-N/A}
+DISK_LINES=()
+while IFS= read -r line; do
+  DISK_LINES+=("$line")
+done < <(df -h --output=target,used,size -x tmpfs -x devtmpfs | awk 'NR>1 && ($1=="/" || $1 ~ /^\/mnt\//){print $1 ": " $2 " / " $3}')
 
 # Terminal
 TERMINAL="${TERM:-N/A}"
@@ -152,42 +169,62 @@ else
   SESSION_DISPLAY="$DE ($SESSION_TYPE)"
 fi
 
-# --- Вывод с цветами ---
-
-echo -e "${BLUE}┌───────────────────────────────┐${NC}"
-echo -e "${BLUE}│       ${GREEN}System Information      ${BLUE}│${NC}"
-echo -e "${BLUE}└───────────────────────────────┘${NC}"
-
-echo -e "${GREEN}Hostname:${NC}      $HOSTNAME"
-echo -e "${GREEN}OS:${NC}            $OS"
-echo -e "${GREEN}Kernel:${NC}        $KERNEL"
-echo -e "${GREEN}Uptime:${NC}        $UPTIME"
-echo -e "${GREEN}Shell:${NC}         $SHELL"
-echo -e "${GREEN}Resolution:${NC}    $RESOLUTION"
-echo -e "${GREEN}DE / WM:${NC}       $SESSION_DISPLAY"
-echo -e "${GREEN}WM Theme:${NC}      ${WM_THEME:-N/A}"
-echo -e "${GREEN}GTK Theme:${NC}     ${GTK_THEME:-N/A}"
-echo -e "${GREEN}Icon Theme:${NC}    ${ICON_THEME:-N/A}"
-echo -e "${GREEN}CPU:${NC}           $CPU"
-echo -e "${GREEN}GPU:${NC}           $GPU"
-echo -e "${GREEN}RAM Usage:${NC}     $RAM"
-echo -e "${GREEN}Swap Usage:${NC}    $SWAP"
-echo -e "${GREEN}Disks Usage:${NC}   $(echo "$DISKS" | head -n1)"
-if [ "$(echo "$DISKS" | wc -l)" -gt 1 ]; then
-  echo "$DISKS" | tail -n +2 | while read line; do
-    printf "               %s\n" "$line"
+# --- Формируем массив инфы ---
+INFO_LINES=(
+  "${GREEN}Hostname:${NC}     $HOSTNAME"
+  " ${GREEN}OS:${NC}           $OS"
+  "  ${GREEN}Kernel:${NC}       $KERNEL"
+  "  ${GREEN}Uptime:${NC}       $UPTIME"
+  "   ${GREEN}Shell:${NC}        $SHELL"
+  "    ${GREEN}Resolution:${NC}   $RESOLUTION"
+  " ${GREEN}DE / WM:${NC}      $SESSION_DISPLAY"
+  " ${GREEN}WM Theme:${NC}     ${WM_THEME:-N/A}"
+  " ${GREEN}GTK Theme:${NC}    ${GTK_THEME:-N/A}"
+  " ${GREEN}Icon Theme:${NC}   ${ICON_THEME:-N/A}"
+  " ${GREEN}CPU:${NC}          $CPU"
+  " ${GREEN}GPU:${NC}          $GPU"
+  " ${GREEN}RAM Usage:${NC}    $RAM"
+  "    ${GREEN}Swap Usage:${NC}   $SWAP"
+)
+if [ ${#DISK_LINES[@]} -gt 0 ]; then
+  INFO_LINES+=("    ${GREEN}Disk Usage:${NC}   ${DISK_LINES[0]}")
+  for ((i=1; i<${#DISK_LINES[@]}; i++)); do
+    INFO_LINES+=("                  ${DISK_LINES[i]}")
   done
+else
+  INFO_LINES+=("    ${GREEN}Disk Usage:${NC}   N/A")
 fi
-echo -e "${GREEN}Terminal:${NC}      $TERMINAL"
+INFO_LINES+=(
+  "       ${GREEN}Terminal:${NC}     $TERMINAL"
+)
 if [ -n "$BATTERY" ]; then
-  echo -e "${GREEN}Battery:${NC}       $BATTERY"
+  INFO_LINES+=("          ${GREEN}Battery:${NC}       $BATTERY")
 fi
-echo -e "${GREEN}Locale:${NC}        $LOCALE"
-echo -e "${GREEN}CPU Usage:${NC}     $CPU_USAGE"
+INFO_LINES+=(
+  "         ${GREEN}Locale:${NC}       $LOCALE"
+  "          ${GREEN}CPU Usage:${NC}    $CPU_USAGE"
+)
 
-# Внизу цвета терминала для проверки темы
-echo -e "\n${BLUE}Terminal colors:${NC}"
-for i in {0..15}; do
-  echo -ne "\033[48;5;${i}m  \033[0m"
+# --- Выровнять массивы по длине ---
+max_lines=${#LOGO_LINES[@]}
+[ ${#INFO_LINES[@]} -gt $max_lines ] && max_lines=${#INFO_LINES[@]}
+while [ ${#LOGO_LINES[@]} -lt $max_lines ]; do
+  LOGO_LINES+=("")
 done
+while [ ${#INFO_LINES[@]} -lt $max_lines ]; do
+  INFO_LINES+=("")
+done
+
+# --- Вывод: лого и инфа в две колонки ---
+logo_pad=8  # для красивого выравнивания совы
+for ((i=0; i<max_lines; i++)); do
+  printf "%*s${ORANGE}%-35s${NC}  %b\n" $logo_pad "" "${LOGO_LINES[i]}" "${INFO_LINES[i]}"
+done
+
+# Цветные квадратики (0-15)
 echo
+printf "${BLUE}Terminal colors:${NC}\n"
+for i in {0..15}; do
+  printf "\033[48;5;%sm  \033[0m" "$i"
+done
+printf "\n"
