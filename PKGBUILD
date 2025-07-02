@@ -8,9 +8,9 @@ arch=('any')
 url="https://github.com/maseckt/fortunafetch2"
 license=('GPL 3.0')
 depends=('xorg-xrandr' 'lsb-release' 'pciutils' 'inetutils' 'procps-ng')  # нужные зависимости
-source=("$pkgname".sh)
+source=("fortunafetch2.sh")
 md5sums=('SKIP')
 
 package() {
-  install -Dm755 "$srcdir/$pkgname.sh" "$pkgdir/usr/bin/$pkgname"
+  install -Dm755 "$srcdir/fortunafetch2.sh" "$pkgdir/usr/bin/fortunafetch2"
 }
