@@ -103,9 +103,9 @@ else
   RAM="N/A"
 fi
 
-# Disk (root partition usage)
-DISK=$(df -h / | awk 'NR==2{print $3 " / " $2}')
-DISK=${DISK:-N/A}
+# Диски (только / и /mnt/*, каждый на отдельной строке)
+DISKS=$(df -h --output=target,used,size -x tmpfs -x devtmpfs | awk 'NR>1 && ($1=="/" || $1 ~ /^\/mnt\//){print $1 ": " $2 " / " $3}' )
+DISKS=${DISKS:-N/A}
 
 # Terminal
 TERMINAL="${TERM:-N/A}"
@@ -138,6 +138,20 @@ else
   SESSION_TYPE="TTY/Unknown"
 fi
 
+# Swap (used/total)
+if command -v free >/dev/null 2>&1; then
+  SWAP=$(free -h | awk '/Swap:/ {print $3 " / " $2}')
+else
+  SWAP="N/A"
+fi
+
+# Формируем строку сессии
+if [ "$SESSION_TYPE" = "TTY/Unknown" ]; then
+  SESSION_DISPLAY="TTY"
+else
+  SESSION_DISPLAY="$DE ($SESSION_TYPE)"
+fi
+
 # --- Вывод с цветами ---
 
 echo -e "${BLUE}┌───────────────────────────────┐${NC}"
@@ -150,16 +164,21 @@ echo -e "${GREEN}Kernel:${NC}        $KERNEL"
 echo -e "${GREEN}Uptime:${NC}        $UPTIME"
 echo -e "${GREEN}Shell:${NC}         $SHELL"
 echo -e "${GREEN}Resolution:${NC}    $RESOLUTION"
-echo -e "${GREEN}DE / WM:${NC}       $DE"
+echo -e "${GREEN}DE / WM:${NC}       $SESSION_DISPLAY"
 echo -e "${GREEN}WM Theme:${NC}      ${WM_THEME:-N/A}"
 echo -e "${GREEN}GTK Theme:${NC}     ${GTK_THEME:-N/A}"
 echo -e "${GREEN}Icon Theme:${NC}    ${ICON_THEME:-N/A}"
 echo -e "${GREEN}CPU:${NC}           $CPU"
 echo -e "${GREEN}GPU:${NC}           $GPU"
 echo -e "${GREEN}RAM Usage:${NC}     $RAM"
-echo -e "${GREEN}Disk Usage:${NC}    $DISK"
+echo -e "${GREEN}Swap Usage:${NC}    $SWAP"
+echo -e "${GREEN}Disks Usage:${NC}   $(echo "$DISKS" | head -n1)"
+if [ "$(echo "$DISKS" | wc -l)" -gt 1 ]; then
+  echo "$DISKS" | tail -n +2 | while read line; do
+    printf "               %s\n" "$line"
+  done
+fi
 echo -e "${GREEN}Terminal:${NC}      $TERMINAL"
-echo -e "${GREEN}Session:${NC}       $SESSION_TYPE"
 if [ -n "$BATTERY" ]; then
   echo -e "${GREEN}Battery:${NC}       $BATTERY"
 fi
@@ -168,10 +187,7 @@ echo -e "${GREEN}CPU Usage:${NC}     $CPU_USAGE"
 
 # Внизу цвета терминала для проверки темы
 echo -e "\n${BLUE}Terminal colors:${NC}"
-for i in {0..7}; do
-  echo -ne "\033[38;5;${i}m█\033[0m "
-done
-for i in {8..15}; do
-  echo -ne "\033[38;5;${i}m█\033[0m "
+for i in {0..15}; do
+  echo -ne "\033[48;5;${i}m  \033[0m"
 done
 echo
