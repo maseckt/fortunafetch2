@@ -1,4 +1,4 @@
-pkgbase = fortunafetch2
+pkgbase = fortunafetch
 	pkgdesc = THE BEST FETCH IN THE WORLD OF ALL EXISTING. 100% FASTER THAN FASTFETCH AND NEOFETCH. PROVEN BY SCIENTISTS.( The following project is a meme and was made for fun dont take it seriously )
 	pkgver = 2.1
 	pkgrel = 3
@@ -10,7 +10,7 @@ pkgbase = fortunafetch2
 	depends = pciutils
 	depends = inetutils
 	depends = procps-ng
-	source = fortunafetch2.sh
+	source = fortunafetch.sh
 	md5sums = SKIP
 
-pkgname = fortunafetch2
+pkgname = fortunafetch
